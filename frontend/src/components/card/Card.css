@@ -1,0 +1,24 @@
+.card {
+  background: rgb(255, 255, 255);
+  padding: 30px;
+  margin-top: 10px;
+  border-radius: 3px;
+  border: 3px solid black;
+  box-shadow: 0.5rem 0.5rem 0 black;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* .card-header {
+  margin-bottom: 0;
+} */
+
+/* .border {
+  width: 200px;
+  height: 35px;
+  background-color: rgb(196, 228, 255);
+  margin: auto;
+  position: relative;
+  bottom: 60px;
+} */

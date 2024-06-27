@@ -1,1 +1,1 @@
-# Scaper for reicpes
+# Scaper for recipes
