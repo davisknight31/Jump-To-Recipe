@@ -1,0 +1,17 @@
+.ingredient-header {
+  margin-bottom: 0;
+  text-align: left;
+  padding-left: 10px;
+}
+
+.ingredient-list {
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  width: fit-content;
+  padding-left: 25px;
+}
+
+.number {
+  font-weight: bold;
+}

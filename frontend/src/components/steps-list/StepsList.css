@@ -1,0 +1,22 @@
+.steps-header {
+  margin-bottom: 0;
+  text-align: left;
+  padding-left: 10px;
+}
+
+.steps-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  width: fit-content;
+  padding-left: 10px;
+}
+
+.number {
+  font-weight: bold;
+}
+
+.step-list-item {
+  padding-bottom: 10px;
+}

@@ -35,8 +35,8 @@ def scrape_allrecipes_details(recipe_link):
     driver.get(recipe_link)
     WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, '.article-heading')))
     page_source = driver.page_source
-    with open('dump.html', 'w', encoding='utf-8') as f:
-        f.write(str(page_source))
+    # with open('dump.html', 'w', encoding='utf-8') as f:
+    #     f.write(str(page_source))
 
 
     soup = BeautifulSoup(page_source, 'html.parser')

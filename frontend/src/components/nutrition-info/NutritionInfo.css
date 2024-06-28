@@ -1,0 +1,21 @@
+.nutrition-info-header {
+  margin-bottom: 0;
+  text-align: left;
+  padding-left: 10px;
+}
+
+.nutrition-label {
+  font-weight: bold;
+}
+
+.nutrition-info {
+  /* display: flex; */
+  /* justify-content: space-between; */
+  /* padding-left: 10px; */
+  /* flex-wrap: wrap; */
+}
+.nutrition-info-item {
+  text-align: left;
+  padding-left: 10px;
+  padding-bottom: 5px;
+}

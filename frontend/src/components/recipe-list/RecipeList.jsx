@@ -126,6 +126,16 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
           </div>
         )}
         <ul className="recipe-list">
+          <li>
+            <Link
+              className="recipe-link"
+              to={`/details/${"Apple Pie"}?recipe_link=${encodeURIComponent(
+                "https://walmart.com"
+              )}&origin=${"allrecipes"}`}
+            >
+              Test
+            </Link>
+          </li>
           {itemsForCurrentPage.map((recipe, index) => (
             <li className="recipe-list-item" key={index}>
               <Link

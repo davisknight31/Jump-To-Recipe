@@ -1,0 +1,41 @@
+.general-detail {
+  font-size: 12px;
+  text-align: left;
+  padding-left: 10px;
+}
+
+.general-detail-label {
+  font-weight: bold;
+}
+
+.general-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.general-detail-grid-item {
+  width: fit-content;
+  padding: 10px;
+  text-align: left;
+  /* text-wrap: nowrap; */
+}
+
+.author-and-link {
+  padding: 0px 10px 0px 10px;
+  display: flex;
+  font-size: 12px;
+  gap: 15px;
+  text-align: left;
+  flex-wrap: wrap;
+}
+
+.original-link {
+}
+
+.recipe-image {
+  display: block;
+  margin: 0px auto 20px auto;
+  width: 50%;
+  min-width: 200px;
+  border: 4px solid var(--primary-color);
+}
