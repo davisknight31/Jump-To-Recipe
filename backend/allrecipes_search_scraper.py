@@ -43,11 +43,9 @@ def scrape_recipes(search_string):
         driver.get(built_url)
         WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, 'a')))
         page_source = driver.page_source
-        with open('dump.html', 'w', encoding='utf-8') as f:
-            f.write(str(page_source))
+        # with open('dump.html', 'w', encoding='utf-8') as f:
+        #     f.write(str(page_source))
 
-
-     
 
         soup = BeautifulSoup(page_source, 'html.parser')
         anchors = soup.find_all(class_ = 'mntl-card-list-items') 
@@ -68,6 +66,7 @@ def scrape_recipes(search_string):
                     stars = stars + 0.5
 
                 info = {
+                        "origin": "allrecipes",
                         "recipe_title": recipe_name,
                         "recipe_link": recipe_link,
                         'star_rating': stars
@@ -75,14 +74,8 @@ def scrape_recipes(search_string):
                 recipes_info.append(info)
         pagination_amount = pagination_amount + 24
         built_url = base_url + str(pagination_amount)
-        # print(built_url)
-        # print(recipes_info)
 
-    # return {
-    #         'recipe_names': recipe_names,
-    #         'recipe_links': recipe_links
-    #     }
-    print(recipes_info)
+    # print(recipes_info)
     return recipes_info
 
 

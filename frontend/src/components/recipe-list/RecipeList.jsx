@@ -132,16 +132,22 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
                 className="recipe-link"
                 to={`/details/${
                   recipe.recipe_title
-                }?recipe_link=${encodeURIComponent(recipe.recipe_link)}`}
+                }?recipe_link=${encodeURIComponent(
+                  recipe.recipe_link
+                )}&origin=${recipe.origin}`}
                 // state={{
                 //   recipe_title: recipe.recipe_title,
                 //   recipe_link: recipe.recipe_link,
                 //   star_rating: recipe.star_rating,
                 // }}
               >
-                <span class="recipe-title">{recipe.recipe_title}</span>
+                <span className="recipe-title">{recipe.recipe_title}</span>
                 <br></br>
-                <span class="recipe-rating">{recipe.star_rating} Stars</span>
+                <span className="recipe-rating">
+                  {recipe.star_rating} Stars
+                </span>{" "}
+                <br></br>
+                <span className="recipe-origin">{recipe.origin}</span>
               </Link>
             </li>
           ))}

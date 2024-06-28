@@ -25,6 +25,17 @@ export const getRecipes = async (searchString) => {
   }
 };
 
+export const getRecipeDetails = async (recipeLink, origin) => {
+  try {
+    const response = await api.get("/api/get_recipe_details", {
+      params: { recipeLink, origin },
+    });
+    return response;
+  } catch (error) {
+    throw new Error("Error fetching recipe details");
+  }
+};
+
 export const getCachedRecipes = () => {
   return cachedRecipes;
 };
