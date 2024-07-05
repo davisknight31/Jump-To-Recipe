@@ -1,0 +1,10 @@
+.details-spinner-container {
+  display: flex;
+  justify-content: center;
+  height: 50vh;
+  align-items: center;
+}
+
+.details-wrapper {
+  margin-bottom: 50px;
+}

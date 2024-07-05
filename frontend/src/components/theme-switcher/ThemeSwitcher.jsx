@@ -22,15 +22,17 @@ const ThemeSwitcher = () => {
 
   return (
     <>
-      <div className="switcher">
-        {themes.map((theme, index) => (
-          <button
-            className="theme-button"
-            key={index}
-            onClick={() => switchTheme(theme)}
-            style={{ backgroundColor: `var(--primary-color-${theme})` }}
-          ></button>
-        ))}
+      <div className="wrapper">
+        <div className="switcher">
+          {themes.map((theme, index) => (
+            <button
+              className="theme-button"
+              key={index}
+              onClick={() => switchTheme(theme)}
+              style={{ backgroundColor: `var(--primary-color-${theme})` }}
+            ></button>
+          ))}
+        </div>
       </div>
     </>
   );

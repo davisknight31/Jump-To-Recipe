@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { act, useEffect, useState } from "react";
 import "./RecipeList.css";
 import {
   getRecipes,
   getCachedRecipes,
   hasPreviouslySearched,
+  setCachedActivePage,
+  getCachedActivePage,
 } from "../../services/api";
 import Spinner from "../spinner/Spinner";
 import json from "../../assets/testJson.json";
@@ -17,6 +19,7 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
   const [itemsForCurrentPage, setItemsForCurrentPage] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
   const [emptyList, setEmptyList] = useState(true);
+  const [emptySearch, setEmptySearch] = useState(false);
 
   useEffect(() => {
     // if (searchValue && hasSearched) {
@@ -25,17 +28,23 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
       if (searchValue) {
         try {
           setEmptyList(false);
+          setEmptySearch(false);
           resetData();
           setHasSearched(true);
           setIsFetching(true);
           const response = await getRecipes(searchValue);
-          setRecipes(response);
-          console.log(recipes);
-          const totalPages = Math.ceil(response.length / 10);
-          setTotalPages(totalPages);
-          goToPage(1);
-          setEmptyList(false);
-          setIsFetching(false);
+          if (response.length <= 0) {
+            setEmptySearch(true);
+            setIsFetching(false);
+          } else {
+            setRecipes(response);
+            console.log(response);
+            const totalPages = Math.ceil(response.length / 10);
+            setTotalPages(totalPages);
+            goToPage(1);
+            setEmptyList(false);
+            setIsFetching(false);
+          }
         } catch (error) {
           console.error("Error fetching in recipe list component:", error);
         }
@@ -47,7 +56,8 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
           console.log(recipes);
           const totalPages = Math.ceil(getCachedRecipes().length / 10);
           setTotalPages(totalPages);
-          goToPage(1);
+          setActivePage(getCachedActivePage());
+          goToPage(getCachedActivePage());
           setIsFetching(false);
         }
       }
@@ -93,6 +103,7 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
 
   const goToPage = (page) => {
     setActivePage(page);
+    setCachedActivePage(page);
     window.scrollTo(0, 0);
   };
 
@@ -105,6 +116,7 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
     setRecipes([]);
     setItemsForCurrentPage([]);
     setTotalPages(0);
+    setCachedActivePage(1);
   };
 
   // console.log("recipes:", recipes);
@@ -120,22 +132,18 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
           (!hasSearched && !hasPreviouslySearched() && (
             <div className="no-results">Search for recipes above!</div>
           ))}
+
+        {emptySearch && (
+          <div className="no-results">
+            No results were found... perhaps you have a typo?
+          </div>
+        )}
         {isFetching && (
-          <div className="spinner-container">
+          <div className="home-spinner-container">
             <Spinner></Spinner>
           </div>
         )}
         <ul className="recipe-list">
-          <li>
-            <Link
-              className="recipe-link"
-              to={`/details/${"Apple Pie"}?recipe_link=${encodeURIComponent(
-                "https://walmart.com"
-              )}&origin=${"allrecipes"}`}
-            >
-              Test
-            </Link>
-          </li>
           {itemsForCurrentPage.map((recipe, index) => (
             <li className="recipe-list-item" key={index}>
               <Link
@@ -154,8 +162,12 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
                 <span className="recipe-title">{recipe.recipe_title}</span>
                 <br></br>
                 <span className="recipe-rating">
-                  {recipe.star_rating} Stars
-                </span>{" "}
+                  {recipe.star_rating === 0 ? (
+                    <span>No Ratings</span>
+                  ) : (
+                    <span>{recipe.star_rating} Stars</span>
+                  )}
+                </span>
                 <br></br>
                 <span className="recipe-origin">{recipe.origin}</span>
               </Link>

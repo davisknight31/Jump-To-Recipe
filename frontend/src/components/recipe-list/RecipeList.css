@@ -2,7 +2,7 @@
   /* padding: 0px 40px 0px 40px; */
 }
 
-.spinner-container {
+.home-spinner-container {
   display: flex;
   justify-content: center;
 }
@@ -33,7 +33,7 @@
 }
 
 .recipe-title {
-  color: rgb(0, 0, 0);
+  color: var(--text-color);
   font-weight: 800;
   text-decoration: underline;
 }
@@ -44,7 +44,7 @@
 }
 
 .recipe-rating {
-  color: rgb(255, 223, 41);
+  color: rgb(238, 194, 0);
   font-weight: 800;
   text-wrap: nowrap;
   /* margin-left: 10px; */

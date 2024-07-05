@@ -28,6 +28,12 @@ const HomePage = () => {
     // setResetValue(false);
   };
 
+  const handleKeyPress = (key) => {
+    if (key === "Enter") {
+      handleSearchClick();
+    }
+  };
+
   return (
     <>
       <div className="cards">
@@ -36,6 +42,7 @@ const HomePage = () => {
             value={inputValue}
             onChange={handleInputChange}
             placeholderText="Enter a recipe!"
+            handleKeyPress={handleKeyPress}
           ></Input>
           <div className="button-group">
             <Button

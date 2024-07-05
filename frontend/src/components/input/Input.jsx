@@ -1,7 +1,17 @@
 import React from "react";
 import "./Input.css";
 
-const Input = ({ value, onChange, label = "", placeholderText = "" }) => {
+const Input = ({
+  value,
+  onChange,
+  handleKeyPress,
+  label = "",
+  placeholderText = "",
+}) => {
+  const handleKeyDown = (event) => {
+    handleKeyPress(event.key);
+  };
+
   return (
     <div>
       {/* <label className="input-label">{placeholderText}</label> */}
@@ -12,6 +22,7 @@ const Input = ({ value, onChange, label = "", placeholderText = "" }) => {
         className="input-field"
         value={value}
         onChange={(e) => onChange(e.target.value)}
+        onKeyUp={handleKeyDown}
         placeholder={placeholderText}
       />
     </div>

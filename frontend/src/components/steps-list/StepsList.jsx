@@ -1,7 +1,7 @@
 import React from "react";
 import "./StepsList.css";
 
-const StepsList = ({ steps }) => {
+const StepsList = ({ steps = [] }) => {
   return (
     <>
       <h1 className="steps-header">Steps</h1>

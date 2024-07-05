@@ -10,6 +10,7 @@ const api = axios.create({
 });
 
 let cachedRecipes = {};
+let cachedActivePage = 1;
 let previouslySearched = false;
 
 export const getRecipes = async (searchString) => {
@@ -42,6 +43,14 @@ export const getCachedRecipes = () => {
 
 export const hasPreviouslySearched = () => {
   return previouslySearched;
+};
+
+export const getCachedActivePage = () => {
+  return cachedActivePage;
+};
+
+export const setCachedActivePage = (page) => {
+  cachedActivePage = page;
 };
 
 export default api;

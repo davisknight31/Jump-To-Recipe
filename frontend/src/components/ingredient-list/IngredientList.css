@@ -4,6 +4,10 @@
   padding-left: 10px;
 }
 
+.section-header {
+  font-weight: bold;
+}
+
 .ingredient-list {
   padding: 0;
   margin: 0;

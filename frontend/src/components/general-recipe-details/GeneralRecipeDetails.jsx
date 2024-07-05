@@ -14,7 +14,11 @@ const GeneralRecipeDetails = ({
   return (
     <>
       <div className="recipe-image-wrapper">
-        <img className="recipe-image" src={image}></img>
+        <img
+          className="recipe-image"
+          src={image}
+          alt="Image could not be found or did not load properly"
+        ></img>
       </div>
       <div className="general-detail-grid">
         <div className="general-detail-grid-item">
@@ -44,9 +48,8 @@ const GeneralRecipeDetails = ({
           {author}
         </div>
         <div className="">
-          <span className="general-detail-label">Original Recipe: </span>
           <a href={recipeLink} target="_blank" className="original-link">
-            {recipeLink}
+            Original Recipe
           </a>
         </div>
       </div>

@@ -3,3 +3,4 @@ beautifulsoup4
 fake-useragent
 flask
 Flask-Cors
+requests
