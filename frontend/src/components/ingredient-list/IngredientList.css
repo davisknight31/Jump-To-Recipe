@@ -19,3 +19,9 @@
 .number {
   font-weight: bold;
 }
+
+.no-ingredients {
+  text-align: left;
+  width: fit-content;
+  padding-left: 10px;
+}

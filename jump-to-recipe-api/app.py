@@ -9,7 +9,11 @@ import random
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/api/scrape', methods=['GET'])
+@app.route('/', methods=['GET'])
+def getHome():
+    return jsonify({"Test": "Test"})
+
+@app.route('/recipe-api/scrape', methods=['GET'])
 def scrape():
     search_string = request.args.get('searchString', default = 'Test')
 
@@ -64,7 +68,7 @@ def scrape():
     return jsonify(combined_list)
 
 
-@app.route('/api/get_recipe_details', methods=['GET'])
+@app.route('/recipe-api/get_recipe_details', methods=['GET'])
 def get_recipe_details():
     recipe_link = request.args.get('recipeLink')
     origin = request.args.get('origin')
@@ -79,4 +83,4 @@ def get_recipe_details():
     return scraped_details
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)

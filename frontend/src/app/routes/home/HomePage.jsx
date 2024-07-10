@@ -41,7 +41,7 @@ const HomePage = () => {
           <Input
             value={inputValue}
             onChange={handleInputChange}
-            placeholderText="Enter a recipe!"
+            placeholderText="Enter an ingredient or recipe!"
             handleKeyPress={handleKeyPress}
           ></Input>
           <div className="button-group">

@@ -19,3 +19,9 @@
   padding-left: 10px;
   padding-bottom: 5px;
 }
+
+.no-nutrition {
+  text-align: left;
+  width: fit-content;
+  padding-left: 10px;
+}

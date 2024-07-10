@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:5000";
+// const BASE_URL = "http://localhost:5000";
+const BASE_URL = "https://market-trading-app-davis.com/jumptorecipe";
 
 const api = axios.create({
   baseURL: BASE_URL,
@@ -15,7 +16,7 @@ let previouslySearched = false;
 
 export const getRecipes = async (searchString) => {
   try {
-    const response = await api.get("/api/scrape", {
+    const response = await api.get("/recipe-api/scrape", {
       params: { searchString },
     });
     cachedRecipes = response.data;
@@ -28,7 +29,7 @@ export const getRecipes = async (searchString) => {
 
 export const getRecipeDetails = async (recipeLink, origin) => {
   try {
-    const response = await api.get("/api/get_recipe_details", {
+    const response = await api.get("/recipe-api/get_recipe_details", {
       params: { recipeLink, origin },
     });
     return response;
