@@ -76,8 +76,8 @@
   background-color: rgb(214, 214, 214);
 }
 
-/* @media (max-width: 400px) {
+@media (max-width: 430px) {
   .recipe-list-item {
-    padding-right: 0px;
+    padding-left: 5px;
   }
-} */
+}
