@@ -1,8 +1,4 @@
-.wrapper {
-  /* padding: 0px 40px 0px 40px; */
-}
-
-.home-spinner-container {
+/* .home-spinner-container {
   display: flex;
   justify-content: center;
 }
@@ -27,9 +23,6 @@
 .recipe-list-item {
   padding: 15px;
   padding-left: 0px;
-  /* display: flex; */
-  /* justify-content: space-between; */
-  /* gap: 10px; */
 }
 
 .recipe-title {
@@ -47,7 +40,6 @@
   color: rgb(238, 194, 0);
   font-weight: 800;
   text-wrap: nowrap;
-  /* margin-left: 10px; */
 }
 
 .pagination {
@@ -63,13 +55,11 @@
   font-size: 14px;
   color: white;
   width: fit-content;
-  /* background-color: rgb(214, 214, 214); */
   background-color: rgb(0, 140, 255);
 }
 
 .page-button:hover {
   cursor: pointer;
-  /* background-color: rgb(233, 233, 233); */
   background-color: rgb(68, 196, 255);
 }
 .page-button:disabled {
@@ -81,4 +71,79 @@
   .recipe-list-item {
     padding-left: 5px;
   }
+} */
+
+.recipe-link {
+  /* width: fit-content; */
+  text-decoration: none;
+  transition: transform 0.2s;
+}
+
+.recipe-link:hover {
+  transform: scale(1.1);
+}
+
+.recipe-list {
+  display: grid;
+  gap: 25px 25px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  /* width: 90%; */
+}
+
+.recipe-list-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  background-color: white;
+  width: 150px;
+  height: 150px;
+  margin: auto;
+  padding: 10px;
+  border-radius: 5px;
+  /* box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; */
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.recipe-title {
+  color: var(--text-color);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.recipe-rating {
+  color: rgb(238, 194, 0);
+  font-weight: 800;
+  text-wrap: nowrap;
+}
+
+.recipe-origin {
+  color: black;
+}
+
+.pagination {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+.page-button {
+  padding: 10px 15px 10px 15px;
+  border: none;
+  border-radius: 3px;
+  font-weight: 700;
+  font-size: 14px;
+  color: white;
+  width: fit-content;
+  background-color: rgb(0, 140, 255);
+}
+
+.page-button:hover {
+  cursor: pointer;
+  background-color: rgb(68, 196, 255);
+}
+.page-button:disabled {
+  cursor: not-allowed;
+  background-color: rgb(214, 214, 214);
 }

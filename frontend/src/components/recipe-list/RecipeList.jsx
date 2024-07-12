@@ -93,8 +93,8 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
   }, [resetClicked, setResetValue]);
 
   useEffect(() => {
-    const startIndex = (activePage - 1) * 10;
-    const endIndex = startIndex + 10;
+    const startIndex = (activePage - 1) * 9;
+    const endIndex = startIndex + 9;
     if (recipes.length > 0) {
       const newItems = recipes.slice(startIndex, endIndex);
       setItemsForCurrentPage(newItems);
@@ -125,40 +125,41 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
 
   return (
     <>
-      <div className="wrapper">
-        {(emptyList && (
+      {/* <div className="wrapper"> */}
+      {(emptyList && (
+        <div className="no-results">Search for recipes above!</div>
+      )) ||
+        (!hasSearched && !hasPreviouslySearched() && (
           <div className="no-results">Search for recipes above!</div>
-        )) ||
-          (!hasSearched && !hasPreviouslySearched() && (
-            <div className="no-results">Search for recipes above!</div>
-          ))}
+        ))}
 
-        {emptySearch && (
-          <div className="no-results">
-            No results were found... perhaps you have a typo?
-          </div>
-        )}
-        {isFetching && (
-          <div className="home-spinner-container">
-            <Spinner></Spinner>
-          </div>
-        )}
-        <ul className="recipe-list">
+      {emptySearch && (
+        <div className="no-results">
+          No results were found... perhaps you have a typo?
+        </div>
+      )}
+      {isFetching && (
+        <div className="home-spinner-container">
+          <Spinner></Spinner>
+        </div>
+      )}
+      {/* <ul className="recipe-list">
           {itemsForCurrentPage.map((recipe, index) => (
-            <li className="recipe-list-item" key={index}>
-              <Link
-                className="recipe-link"
-                to={`/details/${
-                  recipe.recipe_title
-                }?recipe_link=${encodeURIComponent(
-                  recipe.recipe_link
-                )}&origin=${recipe.origin}`}
-                // state={{
-                //   recipe_title: recipe.recipe_title,
-                //   recipe_link: recipe.recipe_link,
-                //   star_rating: recipe.star_rating,
-                // }}
-              >
+            <Link
+              key={index}
+              className="recipe-link"
+              to={`/details/${
+                recipe.recipe_title
+              }?recipe_link=${encodeURIComponent(recipe.recipe_link)}&origin=${
+                recipe.origin
+              }`}
+              // state={{
+              //   recipe_title: recipe.recipe_title,
+              //   recipe_link: recipe.recipe_link,
+              //   star_rating: recipe.star_rating,
+              // }}
+            >
+              <li className="recipe-list-item" key={index}>
                 <span className="recipe-title">{recipe.recipe_title}</span>
                 <br></br>
                 <span className="recipe-rating">
@@ -170,22 +171,56 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
                 </span>
                 <br></br>
                 <span className="recipe-origin">{recipe.origin}</span>
-              </Link>
-            </li>
+              </li>
+            </Link>
           ))}
-        </ul>
-        <div className="pagination">
-          {totalPages > 1 && (
-            <>
-              <button
-                className="page-button"
-                onClick={() => goToPage(activePage - 1)}
-                disabled={activePage === 1}
-              >
-                Previous
-              </button>
+        </ul> */}
 
-              {/* {pageNumbers.map((page) => (
+      <div className="recipe-list">
+        {itemsForCurrentPage.map((recipe, index) => (
+          <Link
+            key={index}
+            className="recipe-link"
+            to={`/details/${
+              recipe.recipe_title
+            }?recipe_link=${encodeURIComponent(recipe.recipe_link)}&origin=${
+              recipe.origin
+            }`}
+            // state={{
+            //   recipe_title: recipe.recipe_title,
+            //   recipe_link: recipe.recipe_link,
+            //   star_rating: recipe.star_rating,
+            // }}
+          >
+            <div className="recipe-list-item" key={index}>
+              <span className="recipe-title">{recipe.recipe_title}</span>
+              {/* <br></br> */}
+              <span className="recipe-rating">
+                {recipe.star_rating === 0 ? (
+                  <span>No Ratings</span>
+                ) : (
+                  <span>{recipe.star_rating} Stars</span>
+                )}
+              </span>
+              {/* <br></br> */}
+              <span className="recipe-origin">{recipe.origin}</span>
+            </div>
+          </Link>
+        ))}
+      </div>
+
+      <div className="pagination">
+        {totalPages > 1 && (
+          <>
+            <button
+              className="page-button"
+              onClick={() => goToPage(activePage - 1)}
+              disabled={activePage === 1}
+            >
+              Previous
+            </button>
+
+            {/* {pageNumbers.map((page) => (
               <button
                 key={page}
                 onClick={() => goToPage(page)}
@@ -194,17 +229,17 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
                 {page}
               </button>
             ))} */}
-              <button
-                className="page-button"
-                onClick={() => goToPage(activePage + 1)}
-                disabled={activePage === totalPages}
-              >
-                Next
-              </button>
-            </>
-          )}
-        </div>
+            <button
+              className="page-button"
+              onClick={() => goToPage(activePage + 1)}
+              disabled={activePage === totalPages}
+            >
+              Next
+            </button>
+          </>
+        )}
       </div>
+      {/* </div> */}
     </>
   );
 };

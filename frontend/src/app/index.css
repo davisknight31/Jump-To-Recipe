@@ -18,7 +18,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --primary-color-light-theme: #e6e6e6;
+  --primary-color-light-theme: #f7f7f7;
   --primary-color-dark-theme: #282b2f;
   --primary-color-mocha-theme: #5e411e;
   --primary-color-blue-theme: #70b5ff;
@@ -27,7 +27,7 @@
 }
 
 .light-theme {
-  --background-color: #ffffff;
+  --background-color: #f7f7f7;
   --text-color: #000000;
   --primary-color: #3e3e3e;
 }

@@ -8,7 +8,7 @@ import ThemeSwitcher from "../components/theme-switcher/ThemeSwitcher";
 function App() {
   return (
     <>
-      <ThemeSwitcher></ThemeSwitcher>
+      {/* <ThemeSwitcher></ThemeSwitcher> */}
       <Router>
         <div className="App">
           <Routes>

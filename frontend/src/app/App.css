@@ -1,15 +1,19 @@
 #root {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 0.5rem;
-  padding-right: 1rem;
+  /* max-width: 720px; */
+  /* margin: 0 auto; */
+  /* padding: 0.5rem; */
+  /* padding-right: 1rem; */
   text-align: center;
   background-color: var(--background-color);
   color: var(--text-color);
+  /* height: 100vh; */
+}
+.App {
+  height: 100vh;
 }
 
 @media (max-width: 400px) {
   #root {
-    padding: 0.25rem;
+    /* padding: 0.25rem; */
   }
 }

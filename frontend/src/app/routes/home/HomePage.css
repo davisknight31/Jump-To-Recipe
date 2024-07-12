@@ -1,4 +1,4 @@
-.cards {
+/* .cards {
   display: flex;
   flex-direction: column;
   gap: 50px;
@@ -17,4 +17,115 @@
 .button-group {
   display: flex;
   gap: 15px;
+} */
+
+.home-container {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  height: 100%;
+  max-width: 1500px;
+  margin: auto;
+}
+
+.search-container {
+  /* min-width: 400px; */
+  /* width: 30%; */
+  /* max-width: 500px; */
+  width: 400px;
+  margin: auto 0 auto 0;
+  padding: 50px;
+  transition: transform 2s;
+
+  /* .jump {
+    transition: color 1s;
+  }
+
+  .to {
+    transition: color 1s;
+  }
+
+  .recipe {
+    transition: color 1s;
+  } */
+
+  /* Input {
+    transition: translate 1s;
+  }
+
+  .button-group {
+    transition: translate 1s;
+  } */
+}
+
+@keyframes colorRotate {
+  from {
+    color: rgb(0, 0, 0);
+  }
+  10% {
+    color: rgb(0, 63, 114);
+  }
+  50% {
+    color: rgb(0, 140, 255);
+  }
+  75% {
+    color: rgb(0, 63, 114);
+  }
+  100% {
+    color: rgb(0, 0, 0);
+  }
+}
+
+.search-container:hover {
+  .website-title {
+    animation: colorRotate 5s linear 0s infinite;
+  }
+
+  /* Input {
+    translate: -50px;
+  }
+  .button-group {
+    translate: 50px;
+  }  */
+  transform: scale(1.1);
+}
+
+.website-title {
+  padding: 0;
+  margin: 0;
+  font-size: 48px;
+  padding-bottom: 10px;
+
+  /* transition: translate 1s; */
+}
+
+.website-title:hover {
+  /* translate: 50px; */
+}
+
+.jump {
+  color: rgb(0, 140, 255);
+}
+
+/* .home-search {
+  transition: translate 1s;
+}
+.home-search:hover {
+  translate: -50px;
+} */
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.results-container {
+  /* width: 50%; */
+  /* min-width: 500px; */
+  /* max-width: 1000px; */
+  /* width: 750px; */
+  min-width: 600px;
+  width: fit-content;
+  margin: auto 0 auto 0;
 }

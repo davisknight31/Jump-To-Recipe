@@ -36,7 +36,42 @@ const HomePage = () => {
 
   return (
     <>
-      <div className="cards">
+      <div className="home-container">
+        <div className="search-container">
+          <h1 className="website-title">
+            <span className="jump">Jump</span>
+            <span> To</span>
+            <span> Recipe</span>
+          </h1>
+          <Input
+            className="home-search"
+            value={inputValue}
+            onChange={handleInputChange}
+            placeholderText="Enter an ingredient or recipe!"
+            handleKeyPress={handleKeyPress}
+          ></Input>
+          <div className="button-group">
+            <Button
+              label="Jump"
+              reset={false}
+              onClick={handleSearchClick}
+            ></Button>
+            <Button
+              label="Reset"
+              reset={true}
+              onClick={handleResetClick}
+            ></Button>
+          </div>
+        </div>
+        <div className="results-container">
+          <RecipeList
+            searchValue={searchValue}
+            resetClicked={resetValue}
+            setResetValue={setResetValue} // Pass the setter to RecipeList
+          ></RecipeList>
+        </div>
+      </div>
+      {/* <div className="cards">
         <Card label="Jump to Recipe">
           <Input
             value={inputValue}
@@ -65,7 +100,7 @@ const HomePage = () => {
             setResetValue={setResetValue} // Pass the setter to RecipeList
           ></RecipeList>
         </Card>
-      </div>
+      </div> */}
 
       {/* <div className="cards">
         <div className="card">
