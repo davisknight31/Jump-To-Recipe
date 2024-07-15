@@ -147,16 +147,6 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
     setCachedActivePage(1);
   };
 
-  const handleRecipeClick = (index) => {
-    setSelectedRecipe(index);
-    setShowRecipeList(false);
-  };
-
-  const handleRecipeExit = () => {
-    setSelectedRecipe(null);
-    setShowRecipeList(true);
-  };
-
   // window.addEventListener("resize", incrementResizeCounter);
 
   return (
@@ -179,62 +169,62 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
         </div>
       )}
 
-      {showRecipeList && (
-        <>
-          <div className={gridClassName}>
-            {itemsForCurrentPage.map((recipe, index) => (
-              <motion.div
-                onClick={() => handleRecipeClick(index)}
-                className="recipe-list-item"
-                key={index}
-                layoutId={`recipe-${index}`}
-              >
-                {selectedRecipe !== index && (
-                  <>
-                    <span className="recipe-title">{recipe.recipe_title}</span>
-                    <span className="recipe-rating">
-                      {recipe.star_rating === 0 ? (
-                        <span>No Ratings</span>
-                      ) : (
-                        <span>{recipe.star_rating} Stars</span>
-                      )}
-                    </span>
-                    <span className="recipe-origin">{recipe.origin}</span>{" "}
-                  </>
-                )}
-              </motion.div>
-            ))}
-          </div>
+      <>
+        <div className={gridClassName}>
+          {itemsForCurrentPage.map((recipe, index) => (
+            <motion.div
+              onClick={() => setSelectedRecipe(index)}
+              className="recipe-list-item"
+              key={index}
+              layoutId={`recipe-${index}`}
+            >
+              {selectedRecipe !== index && (
+                <>
+                  <span className="recipe-title">{recipe.recipe_title}</span>
+                  <span className="recipe-rating">
+                    {recipe.star_rating === 0 ? (
+                      <span>No Ratings</span>
+                    ) : (
+                      <span>{recipe.star_rating} Stars</span>
+                    )}
+                  </span>
+                  <span className="recipe-origin">{recipe.origin}</span>{" "}
+                </>
+              )}
+            </motion.div>
+          ))}
+        </div>
 
-          <div className="pagination">
-            {totalPages > 1 && (
-              <>
-                <button
-                  className="page-button"
-                  onClick={() => goToPage(activePage - 1)}
-                  disabled={activePage === 1}
-                >
-                  Previous
-                </button>
-                <button
-                  className="page-button"
-                  onClick={() => goToPage(activePage + 1)}
-                  disabled={activePage === totalPages}
-                >
-                  Next
-                </button>
-              </>
-            )}
-          </div>
-        </>
-      )}
+        <div className="pagination">
+          {totalPages > 1 && (
+            <>
+              <button
+                className="page-button"
+                onClick={() => goToPage(activePage - 1)}
+                disabled={activePage === 1}
+              >
+                Previous
+              </button>
+              <button
+                className="page-button"
+                onClick={() => goToPage(activePage + 1)}
+                disabled={activePage === totalPages}
+              >
+                Next
+              </button>
+            </>
+          )}
+        </div>
+      </>
 
       <AnimatePresence>
         {selectedRecipe !== null && (
           <DetailsComponent
             layoutId={`recipe-${selectedRecipe}`}
             recipe={itemsForCurrentPage[selectedRecipe]}
-            handleSwap={() => handleRecipeExit()}
+            handleSwap={() => setSelectedRecipe(null)}
+            recipeTitle={recipes[selectedRecipe].recipe_title}
+            recipeLink={recipes.recipe_link}
           />
         )}
       </AnimatePresence>

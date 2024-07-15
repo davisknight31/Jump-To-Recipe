@@ -15,9 +15,10 @@ const IngredientList = ({ ingredientHeaders = [], ingredientLists = [] }) => {
 
   return (
     <>
-      <h1 className="ingredient-header">Ingredients</h1>
+      <div className="ingredient-component-wrapper">
+        <h1 className="ingredient-header">Ingredients</h1>
 
-      {/* {ingredientLists.map((ingredientList, index) => (
+        {/* {ingredientLists.map((ingredientList, index) => (
         <ul className="ingredient-list" key={index}>
           <div className="section-header">{ingredientHeaders[index]}</div>
           {ingredientList.map((ingredient, index) => (
@@ -26,24 +27,25 @@ const IngredientList = ({ ingredientHeaders = [], ingredientLists = [] }) => {
         </ul>
       ))} */}
 
-      {hasNoIngredients && (
-        <div className="no-ingredients">
-          Ingredients could not be found. Try checking the original link.
-        </div>
-      )}
+        {hasNoIngredients && (
+          <div className="no-ingredients">
+            Ingredients could not be found. Try checking the original link.
+          </div>
+        )}
 
-      {!hasNoIngredients && (
-        <>
-          {ingredientLists.map((ingredientList, index) => (
-            <ul className="ingredient-list" key={index}>
-              <div className="section-header">{ingredientHeaders[index]}</div>
-              {ingredientList.map((ingredient, index) => (
-                <li key={index}>{ingredient}</li>
-              ))}
-            </ul>
-          ))}
-        </>
-      )}
+        {!hasNoIngredients && (
+          <>
+            {ingredientLists.map((ingredientList, index) => (
+              <ul className="ingredient-list" key={index}>
+                <div className="section-header">{ingredientHeaders[index]}</div>
+                {ingredientList.map((ingredient, index) => (
+                  <li key={index}>{ingredient}</li>
+                ))}
+              </ul>
+            ))}
+          </>
+        )}
+      </div>
     </>
   );
 };

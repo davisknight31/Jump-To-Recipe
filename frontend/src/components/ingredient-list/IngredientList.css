@@ -1,5 +1,13 @@
+.ingredient-component-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 48%;
+  max-height: 400px;
+  overflow: overlay;
+}
+
 .ingredient-header {
-  margin-bottom: 0;
+  margin: 0;
   text-align: left;
   padding-left: 10px;
 }

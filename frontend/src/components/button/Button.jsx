@@ -1,11 +1,15 @@
 import React from "react";
 import "./Button.css";
 
-const Button = ({ label = "", reset, onClick }) => {
+const Button = ({ label = "", reset, exit, onClick }) => {
   let buttonClass = "button";
   let buttonType = "submit";
   if (reset) {
     buttonType = "reset";
+  }
+
+  if (exit) {
+    buttonType = "submit exit";
   }
 
   return (

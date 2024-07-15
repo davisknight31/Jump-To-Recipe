@@ -3,9 +3,13 @@ import { motion } from "framer-motion";
 import "./DetailsComponent.css";
 import Spinner from "../spinner/Spinner";
 import GeneralRecipeDetails from "../general-recipe-details/GeneralRecipeDetails";
+import IngredientList from "../ingredient-list/IngredientList";
+import StepsList from "../steps-list/StepsList";
+import NutritionInfo from "../nutrition-info/NutritionInfo";
 import { getRecipeDetails } from "../../services/api";
+import Button from "../button/Button";
 
-const DetailsComponent = ({ layoutId, recipe, handleSwap }) => {
+const DetailsComponent = ({ layoutId, recipe, recipeTitle, handleSwap }) => {
   const [wrapperClassName, setWrapperClassName] = useState("");
   const [details, setDetails] = useState(null);
   const [isFetching, setIsFetching] = useState(true);
@@ -32,6 +36,7 @@ const DetailsComponent = ({ layoutId, recipe, handleSwap }) => {
     };
     fetchRecipeDetails();
   }, []);
+
   return (
     <motion.div
       className={"details-component-wrapper" + wrapperClassName}
@@ -39,27 +44,50 @@ const DetailsComponent = ({ layoutId, recipe, handleSwap }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      // transition={{ duration: 2 }}
+      //   transition={{ duration: 2 }}
     >
       {isFetching && (
         <>
-          <Spinner></Spinner>
+          <div className="details-spinner-container">
+            <Spinner></Spinner>
+          </div>
         </>
       )}
       {!isFetching && (
         <>
           <div>
-            <button onClick={closeDetails}>BACK</button>
             <GeneralRecipeDetails
+              title={recipeTitle}
               author={details.author}
-              recipeLink={recipe}
               prepTime={details.prep_time}
               cookTime={details.cook_time}
               totalTime={details.total_time}
               servings={details.servings}
               yield_={details.total_yield}
               image={details.recipe_image}
+              recipeLink={recipe.recipe_link}
             ></GeneralRecipeDetails>
+            <div className="ingredients-and-steps">
+              <IngredientList
+                ingredientHeaders={details.ingredient_headers}
+                ingredientLists={details.ingredients}
+              ></IngredientList>
+              <StepsList steps={details.steps}></StepsList>
+            </div>
+            <div className="nutrition-info-wrapper">
+              <NutritionInfo
+                nutritionInfo={details.nutrition_info}
+              ></NutritionInfo>
+            </div>
+            <div className="button-wrapper">
+              <Button
+                label="Exit"
+                reset={false}
+                exit={true}
+                onClick={closeDetails}
+              ></Button>
+            </div>
+            {/* <button onClick={closeDetails}>BACK</button> */}
           </div>
         </>
       )}
