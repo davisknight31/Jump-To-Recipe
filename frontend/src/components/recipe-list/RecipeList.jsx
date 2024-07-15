@@ -24,6 +24,10 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
   const [emptySearch, setEmptySearch] = useState(false);
   const [showRecipeDetails, setShowRecipeDetails] = useState(false);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const [updateCount, setUpdateCount] = useState(0);
+  const [gridClassName, setGridClassName] = useState("recipe-list");
+  const [showRecipeList, setShowRecipeList] = useState(true);
+  const [selectedId, setSelectedId] = useState(null);
 
   useEffect(() => {
     async function fetchRecipes() {
@@ -76,13 +80,59 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
   }, [resetClicked, setResetValue]);
 
   useEffect(() => {
-    const startIndex = (activePage - 1) * 16;
-    const endIndex = startIndex + 16;
+    const handleResize = () => {
+      setUpdateCount((prevCount) => prevCount + 1);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    console.log(updateCount);
+    let rowsPerPage = 3;
+    let columnsPerPage = 3;
+    if (window.innerWidth > 1550) {
+      columnsPerPage = 4;
+    } else if (window.innerWidth > 800) {
+      columnsPerPage = 3;
+    } else {
+      columnsPerPage = 2;
+    }
+
+    if (window.innerHeight > 1200) {
+      rowsPerPage = 4;
+    } else {
+      rowsPerPage = 3;
+    }
+
+    const numberOfItemsToIndex = rowsPerPage * columnsPerPage;
+    // console.log(columnsPerPage, rowsPerPage, numberOfItemsToIndex);
+    let newGridClassName = "recipe-list ";
+    if (numberOfItemsToIndex === 16) {
+      newGridClassName += "four-by-four";
+    } else if (columnsPerPage === 4 && rowsPerPage === 3) {
+      newGridClassName += "four-by-three";
+    } else if (columnsPerPage === 3 && rowsPerPage === 4) {
+      newGridClassName += "three-by-four";
+    } else if (columnsPerPage === 2 && rowsPerPage === 4) {
+      newGridClassName += "two-by-four";
+    } else if (columnsPerPage === 2 && rowsPerPage === 3) {
+      newGridClassName += "two-by-three";
+    } else {
+      newGridClassName += "three-by-three";
+    }
+
+    setGridClassName(newGridClassName);
+    const startIndex = (activePage - 1) * numberOfItemsToIndex;
+    const endIndex = startIndex + numberOfItemsToIndex;
     if (recipes.length > 0) {
       const newItems = recipes.slice(startIndex, endIndex);
       setItemsForCurrentPage(newItems);
     }
-  }, [recipes, activePage]);
+  }, [recipes, activePage, updateCount]);
 
   const goToPage = (page) => {
     setActivePage(page);
@@ -96,6 +146,18 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
     setTotalPages(0);
     setCachedActivePage(1);
   };
+
+  const handleRecipeClick = (index) => {
+    setSelectedRecipe(index);
+    setShowRecipeList(false);
+  };
+
+  const handleRecipeExit = () => {
+    setSelectedRecipe(null);
+    setShowRecipeList(true);
+  };
+
+  // window.addEventListener("resize", incrementResizeCounter);
 
   return (
     <>
@@ -116,95 +178,63 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
           <Spinner></Spinner>
         </div>
       )}
-      {/* <ul className="recipe-list">
-          {itemsForCurrentPage.map((recipe, index) => (
-            <Link
-              key={index}
-              className="recipe-link"
-              to={`/details/${
-                recipe.recipe_title
-              }?recipe_link=${encodeURIComponent(recipe.recipe_link)}&origin=${
-                recipe.origin
-              }`}
-              // state={{
-              //   recipe_title: recipe.recipe_title,
-              //   recipe_link: recipe.recipe_link,
-              //   star_rating: recipe.star_rating,
-              // }}
-            >
-              <li className="recipe-list-item" key={index}>
-                <span className="recipe-title">{recipe.recipe_title}</span>
-                <br></br>
-                <span className="recipe-rating">
-                  {recipe.star_rating === 0 ? (
-                    <span>No Ratings</span>
-                  ) : (
-                    <span>{recipe.star_rating} Stars</span>
-                  )}
-                </span>
-                <br></br>
-                <span className="recipe-origin">{recipe.origin}</span>
-              </li>
-            </Link>
-          ))}
-        </ul> */}
 
-      {/* <div className="recipe-list"> */}
+      {showRecipeList && (
+        <>
+          <div className={gridClassName}>
+            {itemsForCurrentPage.map((recipe, index) => (
+              <motion.div
+                onClick={() => handleRecipeClick(index)}
+                className="recipe-list-item"
+                key={index}
+                layoutId={`recipe-${index}`}
+              >
+                {selectedRecipe !== index && (
+                  <>
+                    <span className="recipe-title">{recipe.recipe_title}</span>
+                    <span className="recipe-rating">
+                      {recipe.star_rating === 0 ? (
+                        <span>No Ratings</span>
+                      ) : (
+                        <span>{recipe.star_rating} Stars</span>
+                      )}
+                    </span>
+                    <span className="recipe-origin">{recipe.origin}</span>{" "}
+                  </>
+                )}
+              </motion.div>
+            ))}
+          </div>
 
-      {/* Undo to this point */}
-
-      <div className="recipe-list">
-        {itemsForCurrentPage.map((recipe, index) => (
-          <motion.div
-            onClick={() => setSelectedRecipe(index)}
-            className="recipe-list-item"
-            key={index}
-            layoutId={`recipe-${index}`}
-          >
-            {selectedRecipe !== index && (
+          <div className="pagination">
+            {totalPages > 1 && (
               <>
-                <span className="recipe-title">{recipe.recipe_title}</span>
-                <span className="recipe-rating">
-                  {recipe.star_rating === 0 ? (
-                    <span>No Ratings</span>
-                  ) : (
-                    <span>{recipe.star_rating} Stars</span>
-                  )}
-                </span>
-                <span className="recipe-origin">{recipe.origin}</span>{" "}
+                <button
+                  className="page-button"
+                  onClick={() => goToPage(activePage - 1)}
+                  disabled={activePage === 1}
+                >
+                  Previous
+                </button>
+                <button
+                  className="page-button"
+                  onClick={() => goToPage(activePage + 1)}
+                  disabled={activePage === totalPages}
+                >
+                  Next
+                </button>
               </>
             )}
-          </motion.div>
-        ))}
-      </div>
-
-      <div className="pagination">
-        {totalPages > 1 && (
-          <>
-            <button
-              className="page-button"
-              onClick={() => goToPage(activePage - 1)}
-              disabled={activePage === 1}
-            >
-              Previous
-            </button>
-            <button
-              className="page-button"
-              onClick={() => goToPage(activePage + 1)}
-              disabled={activePage === totalPages}
-            >
-              Next
-            </button>
-          </>
-        )}
-      </div>
+          </div>
+        </>
+      )}
 
       <AnimatePresence>
         {selectedRecipe !== null && (
           <DetailsComponent
             layoutId={`recipe-${selectedRecipe}`}
             recipe={itemsForCurrentPage[selectedRecipe]}
-            handleSwap={() => setSelectedRecipe(null)}
+            handleSwap={() => handleRecipeExit()}
           />
         )}
       </AnimatePresence>
