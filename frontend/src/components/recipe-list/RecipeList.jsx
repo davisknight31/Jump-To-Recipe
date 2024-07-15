@@ -8,8 +8,10 @@ import {
   getCachedActivePage,
 } from "../../services/api";
 import Spinner from "../spinner/Spinner";
+import DetailsComponent from "../details-component/DetailsComponent";
 import json from "../../assets/testJson.json";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 
 const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
   const [recipes, setRecipes] = useState([]);
@@ -20,10 +22,10 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
   const [isFetching, setIsFetching] = useState(false);
   const [emptyList, setEmptyList] = useState(true);
   const [emptySearch, setEmptySearch] = useState(false);
+  const [showRecipeDetails, setShowRecipeDetails] = useState(false);
+  const [selectedRecipe, setSelectedRecipe] = useState(null);
 
   useEffect(() => {
-    // if (searchValue && hasSearched) {
-
     async function fetchRecipes() {
       if (searchValue) {
         try {
@@ -65,25 +67,6 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
     fetchRecipes();
   }, [searchValue]);
 
-  // else {
-  //   if (hasPreviouslySearched() === true) {
-  //     setIsFetching(true);
-  //     setRecipes(getCachedRecipes());
-  //     const totalPages = Math.ceil(response.length / 10);
-  //     setTotalPages(totalPages);
-  //     goToPage(1);
-  //     setIsFetching(false);
-  //   }
-  // }
-
-  // }, [searchValue, hasSearched]);
-
-  // useEffect(() => {
-  //   if (searchValue) {
-  //     setHasSearched(true);
-  //   }
-  // }, [searchValue]);
-
   useEffect(() => {
     if (resetClicked) {
       resetData();
@@ -93,8 +76,8 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
   }, [resetClicked, setResetValue]);
 
   useEffect(() => {
-    const startIndex = (activePage - 1) * 9;
-    const endIndex = startIndex + 9;
+    const startIndex = (activePage - 1) * 16;
+    const endIndex = startIndex + 16;
     if (recipes.length > 0) {
       const newItems = recipes.slice(startIndex, endIndex);
       setItemsForCurrentPage(newItems);
@@ -107,11 +90,6 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
     window.scrollTo(0, 0);
   };
 
-  const pageNumbers = [];
-  for (let i = 1; i <= totalPages; i++) {
-    pageNumbers.push(i);
-  }
-
   const resetData = () => {
     setRecipes([]);
     setItemsForCurrentPage([]);
@@ -119,13 +97,8 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
     setCachedActivePage(1);
   };
 
-  // console.log("recipes:", recipes);
-  // console.log("totalPages:", totalPages);
-  // console.log("pageNumbers:", pageNumbers);
-
   return (
     <>
-      {/* <div className="wrapper"> */}
       {(emptyList && (
         <div className="no-results">Search for recipes above!</div>
       )) ||
@@ -176,36 +149,32 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
           ))}
         </ul> */}
 
+      {/* <div className="recipe-list"> */}
+
+      {/* Undo to this point */}
+
       <div className="recipe-list">
         {itemsForCurrentPage.map((recipe, index) => (
-          <Link
+          <motion.div
+            onClick={() => setSelectedRecipe(index)}
+            className="recipe-list-item"
             key={index}
-            className="recipe-link"
-            to={`/details/${
-              recipe.recipe_title
-            }?recipe_link=${encodeURIComponent(recipe.recipe_link)}&origin=${
-              recipe.origin
-            }`}
-            // state={{
-            //   recipe_title: recipe.recipe_title,
-            //   recipe_link: recipe.recipe_link,
-            //   star_rating: recipe.star_rating,
-            // }}
+            layoutId={`recipe-${index}`}
           >
-            <div className="recipe-list-item" key={index}>
-              <span className="recipe-title">{recipe.recipe_title}</span>
-              {/* <br></br> */}
-              <span className="recipe-rating">
-                {recipe.star_rating === 0 ? (
-                  <span>No Ratings</span>
-                ) : (
-                  <span>{recipe.star_rating} Stars</span>
-                )}
-              </span>
-              {/* <br></br> */}
-              <span className="recipe-origin">{recipe.origin}</span>
-            </div>
-          </Link>
+            {selectedRecipe !== index && (
+              <>
+                <span className="recipe-title">{recipe.recipe_title}</span>
+                <span className="recipe-rating">
+                  {recipe.star_rating === 0 ? (
+                    <span>No Ratings</span>
+                  ) : (
+                    <span>{recipe.star_rating} Stars</span>
+                  )}
+                </span>
+                <span className="recipe-origin">{recipe.origin}</span>{" "}
+              </>
+            )}
+          </motion.div>
         ))}
       </div>
 
@@ -219,16 +188,6 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
             >
               Previous
             </button>
-
-            {/* {pageNumbers.map((page) => (
-              <button
-                key={page}
-                onClick={() => goToPage(page)}
-                className={activePage === page ? "active" : ""}
-              >
-                {page}
-              </button>
-            ))} */}
             <button
               className="page-button"
               onClick={() => goToPage(activePage + 1)}
@@ -239,7 +198,69 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
           </>
         )}
       </div>
+
+      <AnimatePresence>
+        {selectedRecipe !== null && (
+          <DetailsComponent
+            layoutId={`recipe-${selectedRecipe}`}
+            recipe={itemsForCurrentPage[selectedRecipe]}
+            handleSwap={() => setSelectedRecipe(null)}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* {showRecipeDetails && (
+        <>
+          <DetailsComponent handleSwap={swapRecipeDetails}></DetailsComponent>
+        </>
+      )} */}
+
+      {/* {itemsForCurrentPage.map((recipe, index) => (
+          <Link
+            key={index}
+            className="recipe-link"
+            to={`/details/${
+              recipe.recipe_title
+            }?recipe_link=${encodeURIComponent(recipe.recipe_link)}&origin=${
+              recipe.origin
+            }`}
+          >
+            <div onClick={swap()} className="recipe-list-item" key={index}>
+              <span className="recipe-title">{recipe.recipe_title}</span>
+              <span className="recipe-rating">
+                {recipe.star_rating === 0 ? (
+                  <span>No Ratings</span>
+                ) : (
+                  <span>{recipe.star_rating} Stars</span>
+                )}
+              </span>
+              <span className="recipe-origin">{recipe.origin}</span>
+            </div>
+          </Link>
+        ))} */}
       {/* </div> */}
+      {/* 
+      <div className="pagination">
+        {totalPages > 1 && (
+          <>
+            <button
+              className="page-button"
+              onClick={() => goToPage(activePage - 1)}
+              disabled={activePage === 1}
+            >
+              Previous
+            </button>
+
+            <button
+              className="page-button"
+              onClick={() => goToPage(activePage + 1)}
+              disabled={activePage === totalPages + 2}
+            >
+              Next
+            </button>
+          </>
+        )}
+      </div> */}
     </>
   );
 };

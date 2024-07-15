@@ -35,50 +35,31 @@
   width: 400px;
   margin: auto 0 auto 0;
   padding: 50px;
-  transition: transform 2s;
-
-  /* .jump {
-    transition: color 1s;
-  }
-
-  .to {
-    transition: color 1s;
-  }
-
-  .recipe {
-    transition: color 1s;
-  } */
-
-  /* Input {
-    transition: translate 1s;
-  }
-
-  .button-group {
-    transition: translate 1s;
-  } */
+  transition: transform 1s;
 }
 
-@keyframes colorRotate {
-  from {
-    color: rgb(0, 0, 0);
+@keyframes gelatine {
+  from,
+  to {
+    transform: scale(1, 1);
   }
-  10% {
-    color: rgb(0, 63, 114);
+  25% {
+    transform: scale(0.9, 1.1);
   }
   50% {
-    color: rgb(0, 140, 255);
+    transform: scale(1.1, 0.9);
   }
   75% {
-    color: rgb(0, 63, 114);
-  }
-  100% {
-    color: rgb(0, 0, 0);
+    transform: scale(0.95, 1.05);
   }
 }
 
 .search-container:hover {
-  .website-title {
+  /* .website-title {
     animation: colorRotate 5s linear 0s infinite;
+  } */
+  .jump {
+    animation: gelatine 0.5s 0.3s;
   }
 
   /* Input {
@@ -104,8 +85,14 @@
 }
 
 .jump {
+  display: inline-block;
   color: rgb(0, 140, 255);
+  /* transition: transform 2s; */
 }
+
+/* .jump:hover {
+  transform: translate(100px);
+} */
 
 /* .home-search {
   transition: translate 1s;
@@ -125,7 +112,18 @@
   /* min-width: 500px; */
   /* max-width: 1000px; */
   /* width: 750px; */
-  min-width: 600px;
-  width: fit-content;
+  width: 755px; /*width when biggest size*/
+  height: 841px; /*height when biggest size, includes pagination*/
+  /* width: fit-content; */
   margin: auto 0 auto 0;
+}
+
+@media (max-width: 1099px) {
+  .search-container {
+    margin: auto 0 0 0;
+  }
+
+  .results-container {
+    margin: 0;
+  }
 }

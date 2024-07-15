@@ -86,8 +86,8 @@
 .recipe-list {
   display: grid;
   gap: 25px 25px;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
   /* width: 90%; */
 }
 
@@ -101,8 +101,13 @@
   margin: auto;
   padding: 10px;
   border-radius: 5px;
-  /* box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; */
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  transition: transform 0.1s;
+}
+
+.recipe-list-item:hover {
+  transform: scale(1.1);
+  cursor: pointer;
 }
 
 .recipe-title {
