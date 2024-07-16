@@ -15,7 +15,7 @@ const DetailsComponent = ({ layoutId, recipe, recipeTitle, handleSwap }) => {
   const [isFetching, setIsFetching] = useState(true);
 
   const closeDetails = () => {
-    setWrapperClassName(" hidden");
+    // setWrapperClassName(" hidden");
     handleSwap();
   };
   useEffect(() => {
@@ -55,29 +55,33 @@ const DetailsComponent = ({ layoutId, recipe, recipeTitle, handleSwap }) => {
       )}
       {!isFetching && (
         <>
-          <div>
-            <GeneralRecipeDetails
-              title={recipeTitle}
-              author={details.author}
-              prepTime={details.prep_time}
-              cookTime={details.cook_time}
-              totalTime={details.total_time}
-              servings={details.servings}
-              yield_={details.total_yield}
-              image={details.recipe_image}
-              recipeLink={recipe.recipe_link}
-            ></GeneralRecipeDetails>
-            <div className="ingredients-and-steps">
-              <IngredientList
-                ingredientHeaders={details.ingredient_headers}
-                ingredientLists={details.ingredients}
-              ></IngredientList>
-              <StepsList steps={details.steps}></StepsList>
-            </div>
-            <div className="nutrition-info-wrapper">
-              <NutritionInfo
-                nutritionInfo={details.nutrition_info}
-              ></NutritionInfo>
+          <div className="details-component-container">
+            <div className="nested-details">
+              <GeneralRecipeDetails
+                title={recipeTitle}
+                author={details.author}
+                prepTime={details.prep_time}
+                cookTime={details.cook_time}
+                totalTime={details.total_time}
+                servings={details.servings}
+                yield_={details.total_yield}
+                image={details.recipe_image}
+                recipeLink={recipe.recipe_link}
+              ></GeneralRecipeDetails>
+              <div className="ingredients-and-steps">
+                <h1 className="ingredient-header">Ingredients</h1>
+                <IngredientList
+                  ingredientHeaders={details.ingredient_headers}
+                  ingredientLists={details.ingredients}
+                ></IngredientList>
+                <h1 className="steps-header">Steps</h1>
+                <StepsList steps={details.steps}></StepsList>
+              </div>
+              <div className="nutrition-info-wrapper">
+                <NutritionInfo
+                  nutritionInfo={details.nutrition_info}
+                ></NutritionInfo>
+              </div>
             </div>
             <div className="button-wrapper">
               <Button
@@ -87,7 +91,6 @@ const DetailsComponent = ({ layoutId, recipe, recipeTitle, handleSwap }) => {
                 onClick={closeDetails}
               ></Button>
             </div>
-            {/* <button onClick={closeDetails}>BACK</button> */}
           </div>
         </>
       )}

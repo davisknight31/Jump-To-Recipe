@@ -16,8 +16,6 @@ const IngredientList = ({ ingredientHeaders = [], ingredientLists = [] }) => {
   return (
     <>
       <div className="ingredient-component-wrapper">
-        <h1 className="ingredient-header">Ingredients</h1>
-
         {/* {ingredientLists.map((ingredientList, index) => (
         <ul className="ingredient-list" key={index}>
           <div className="section-header">{ingredientHeaders[index]}</div>

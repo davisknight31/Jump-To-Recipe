@@ -98,14 +98,25 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
       columnsPerPage = 4;
     } else if (window.innerWidth > 800) {
       columnsPerPage = 3;
-    } else {
+    } else if (window.innerWidth > 500) {
       columnsPerPage = 2;
+    } else {
+      columnsPerPage = 1;
     }
 
     if (window.innerHeight > 1200) {
       rowsPerPage = 4;
-    } else {
+    } else if (window.innerHeight > 900) {
       rowsPerPage = 3;
+    } else if (window.innerHeight > 680) {
+      rowsPerPage = 2;
+    } else {
+      rowsPerPage = 1;
+    }
+
+    if (window.innerWidth <= 500) {
+      columnsPerPage = 1;
+      rowsPerPage = 5;
     }
 
     const numberOfItemsToIndex = rowsPerPage * columnsPerPage;
@@ -115,16 +126,45 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
       newGridClassName += "four-by-four";
     } else if (columnsPerPage === 4 && rowsPerPage === 3) {
       newGridClassName += "four-by-three";
-    } else if (columnsPerPage === 3 && rowsPerPage === 4) {
+    } else if (columnsPerPage === 4 && rowsPerPage === 2) {
+      newGridClassName += "four-by-two";
+    } else if (columnsPerPage === 4 && rowsPerPage === 1) {
+      newGridClassName += "four-by-one";
+    }
+    //++
+    else if (columnsPerPage === 3 && rowsPerPage === 4) {
       newGridClassName += "three-by-four";
-    } else if (columnsPerPage === 2 && rowsPerPage === 4) {
+    } else if (columnsPerPage === 3 && rowsPerPage === 3) {
+      newGridClassName += "three-by-three";
+    } else if (columnsPerPage === 3 && rowsPerPage === 2) {
+      newGridClassName += "three-by-two";
+    } else if (columnsPerPage === 3 && rowsPerPage === 1) {
+      newGridClassName += "three-by-one";
+    }
+    //++
+    else if (columnsPerPage === 2 && rowsPerPage === 4) {
       newGridClassName += "two-by-four";
     } else if (columnsPerPage === 2 && rowsPerPage === 3) {
       newGridClassName += "two-by-three";
+    } else if (columnsPerPage === 2 && rowsPerPage === 2) {
+      newGridClassName += "two-by-two";
+    } else if (columnsPerPage === 2 && rowsPerPage === 1) {
+      newGridClassName += "two-by-one";
+    }
+    //++
+    else if (columnsPerPage === 1 && rowsPerPage === 4) {
+      newGridClassName += "one-by-four";
+    } else if (columnsPerPage === 1 && rowsPerPage === 3) {
+      newGridClassName += "one-by-three";
+    } else if (columnsPerPage === 1 && rowsPerPage === 2) {
+      newGridClassName += "one-by-two";
     } else {
-      newGridClassName += "three-by-three";
+      newGridClassName += "one-by-one";
     }
 
+    if (columnsPerPage === 1 && rowsPerPage === 5) {
+      newGridClassName += "recipe-list mobile";
+    }
     setGridClassName(newGridClassName);
     const startIndex = (activePage - 1) * numberOfItemsToIndex;
     const endIndex = startIndex + numberOfItemsToIndex;
@@ -152,19 +192,21 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
   return (
     <>
       {(emptyList && (
-        <div className="no-results">Search for recipes above!</div>
+        <div className="no-results default-container">Search for recipes!</div>
       )) ||
         (!hasSearched && !hasPreviouslySearched() && (
-          <div className="no-results">Search for recipes above!</div>
+          <div className="no-results default-container">
+            Search for recipes!
+          </div>
         ))}
 
       {emptySearch && (
-        <div className="no-results">
+        <div className="no-results default-container">
           No results were found... perhaps you have a typo?
         </div>
       )}
       {isFetching && (
-        <div className="home-spinner-container">
+        <div className="home-spinner-container default-container">
           <Spinner></Spinner>
         </div>
       )}

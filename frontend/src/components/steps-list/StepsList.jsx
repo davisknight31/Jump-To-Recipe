@@ -5,7 +5,6 @@ const StepsList = ({ steps = [] }) => {
   return (
     <>
       <div className="step-component-wrapper">
-        <h1 className="steps-header">Steps</h1>
         <ul className="steps-list">
           {steps.map((step, index) => (
             <li className="step-list-item" key={index}>
