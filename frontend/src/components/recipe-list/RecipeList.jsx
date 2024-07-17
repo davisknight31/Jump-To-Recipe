@@ -194,26 +194,33 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
     return title;
   };
 
+  const handleRecipeSelection = (index) => {
+    setSelectedRecipe(index);
+    window.scrollTo(0, 0);
+  };
+
   // window.addEventListener("resize", incrementResizeCounter);
 
   return (
     <>
       {(emptyList && (
-        <div className="no-results default-container">Search for recipes!</div>
+        <div className="no-results default-container-recipe-list">
+          Search for recipes!
+        </div>
       )) ||
         (!hasSearched && !hasPreviouslySearched() && (
-          <div className="no-results default-container">
+          <div className="no-results default-container-recipe-list">
             Search for recipes!
           </div>
         ))}
 
       {emptySearch && (
-        <div className="no-results default-container">
+        <div className="no-results default-container-recipe-list">
           No results were found... perhaps you have a typo?
         </div>
       )}
       {isFetching && (
-        <div className="home-spinner-container default-container">
+        <div className="home-spinner-container default-container-recipe-list">
           <Spinner></Spinner>
         </div>
       )}
@@ -222,7 +229,7 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
         <div className={gridClassName}>
           {itemsForCurrentPage.map((recipe, index) => (
             <motion.div
-              onClick={() => setSelectedRecipe(index)}
+              onClick={() => handleRecipeSelection(index)}
               className="recipe-list-item"
               key={index}
               layoutId={`recipe-${index}`}

@@ -18,6 +18,7 @@ const DetailsComponent = ({ layoutId, recipe, recipeTitle, handleSwap }) => {
   const closeDetails = () => {
     // setWrapperClassName(" hidden");
     handleSwap();
+    window.scrollTo(0, 0);
   };
   useEffect(() => {
     console.log(recipe.recipe_link, recipe.origin);
@@ -50,7 +51,7 @@ const DetailsComponent = ({ layoutId, recipe, recipeTitle, handleSwap }) => {
     >
       {isFetching && (
         <>
-          <div className="details-spinner-container">
+          <div className="details-spinner-container default-container-details">
             <Spinner></Spinner>
           </div>
         </>

@@ -10,6 +10,17 @@
   justify-content: center;
   /* height: 50vh; */
   align-items: center;
+  height: 200px;
+}
+
+.default-container-details {
+  background: white;
+  padding: 50px;
+  border-radius: 5px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  font-weight: bold;
+  margin: 50px;
+  width: 50%;
 }
 
 .details-component-wrapper {
@@ -114,6 +125,7 @@
     /* padding-bottom: 70%; */
     height: auto;
     bottom: auto;
+    background-color: transparent;
   }
 
   .nested-details {
