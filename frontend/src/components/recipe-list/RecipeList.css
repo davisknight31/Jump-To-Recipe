@@ -263,8 +263,8 @@
   }
 }
 
-@media (max-height: 750px) {
+/* @media (max-height: 750px) {
   .recipe-list {
     height: 40vh;
   }
-}
+} */
