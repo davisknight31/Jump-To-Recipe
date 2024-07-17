@@ -187,6 +187,13 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
     setCachedActivePage(1);
   };
 
+  const truncateTitle = (title) => {
+    if (title.length > 40) {
+      return title.substring(0, 40) + "...";
+    }
+    return title;
+  };
+
   // window.addEventListener("resize", incrementResizeCounter);
 
   return (
@@ -222,7 +229,9 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
             >
               {selectedRecipe !== index && (
                 <>
-                  <span className="recipe-title">{recipe.recipe_title}</span>
+                  <span className="recipe-title">
+                    {truncateTitle(recipe.recipe_title)}
+                  </span>
                   <span className="recipe-rating">
                     {recipe.star_rating === 0 ? (
                       <span>No Ratings</span>

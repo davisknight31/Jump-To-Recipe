@@ -35,7 +35,14 @@ const IngredientList = ({ ingredientHeaders = [], ingredientLists = [] }) => {
           <>
             {ingredientLists.map((ingredientList, index) => (
               <ul className="ingredient-list" key={index}>
-                <div className="section-header">{ingredientHeaders[index]}</div>
+                {ingredientHeaders.length > 0 && (
+                  <>
+                    <div className="section-header">
+                      {ingredientHeaders[index]}
+                    </div>
+                  </>
+                )}
+                {/* <div className="section-header">{ingredientHeaders[index]}</div> */}
                 {ingredientList.map((ingredient, index) => (
                   <li key={index}>{ingredient}</li>
                 ))}
