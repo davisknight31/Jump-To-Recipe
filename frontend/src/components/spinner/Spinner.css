@@ -62,7 +62,7 @@
 
 .loader {
   position: relative;
-  display: flex;
+  /* display: flex; */
 }
 .loader:before,
 .loader:after {

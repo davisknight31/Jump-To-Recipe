@@ -13,6 +13,7 @@ const DetailsComponent = ({ layoutId, recipe, recipeTitle, handleSwap }) => {
   const [wrapperClassName, setWrapperClassName] = useState("");
   const [details, setDetails] = useState(null);
   const [isFetching, setIsFetching] = useState(true);
+  const [recipeLink, setRecipeLink] = useState("");
 
   const closeDetails = () => {
     // setWrapperClassName(" hidden");
@@ -26,6 +27,7 @@ const DetailsComponent = ({ layoutId, recipe, recipeTitle, handleSwap }) => {
           recipe.recipe_link,
           recipe.origin
         );
+        setRecipeLink(recipe.recipe_link);
         console.log("response data", response.data);
         setDetails(response.data);
       } catch (error) {
@@ -66,7 +68,7 @@ const DetailsComponent = ({ layoutId, recipe, recipeTitle, handleSwap }) => {
                 servings={details.servings}
                 yield_={details.total_yield}
                 image={details.recipe_image}
-                recipeLink={recipe.recipe_link}
+                recipeLink={recipeLink}
               ></GeneralRecipeDetails>
               <div className="ingredients-and-steps">
                 <h1 className="ingredient-header">Ingredients</h1>

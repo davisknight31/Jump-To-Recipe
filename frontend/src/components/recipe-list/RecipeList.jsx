@@ -98,7 +98,7 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
       columnsPerPage = 4;
     } else if (window.innerWidth > 800) {
       columnsPerPage = 3;
-    } else if (window.innerWidth > 500) {
+    } else if (window.innerWidth > 550) {
       columnsPerPage = 2;
     } else {
       columnsPerPage = 1;
@@ -114,7 +114,7 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
       rowsPerPage = 1;
     }
 
-    if (window.innerWidth <= 500) {
+    if (window.innerWidth <= 550) {
       columnsPerPage = 1;
       rowsPerPage = 5;
     }
