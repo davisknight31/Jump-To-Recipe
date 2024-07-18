@@ -28,6 +28,7 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
   const [gridClassName, setGridClassName] = useState("recipe-list");
   const [showRecipeList, setShowRecipeList] = useState(true);
   const [selectedId, setSelectedId] = useState(null);
+  const [disabledClass, setDisabledClass] = useState(null);
 
   useEffect(() => {
     async function fetchRecipes() {
@@ -197,9 +198,17 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
   const handleRecipeSelection = (index) => {
     setSelectedRecipe(index);
     window.scrollTo(0, 0);
+    setDisabledClass("disabled");
   };
 
-  // window.addEventListener("resize", incrementResizeCounter);
+  const handleRecipeExit = () => {
+    setSelectedRecipe(null);
+  };
+
+  const resetDisabledClass = () => {
+    console.log("hit");
+    setDisabledClass("");
+  };
 
   return (
     <>
@@ -230,7 +239,7 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
           {itemsForCurrentPage.map((recipe, index) => (
             <motion.div
               onClick={() => handleRecipeSelection(index)}
-              className="recipe-list-item"
+              className={"recipe-list-item " + disabledClass}
               key={index}
               layoutId={`recipe-${index}`}
             >
@@ -275,70 +284,18 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
         </div>
       </>
 
-      <AnimatePresence>
+      <AnimatePresence onExitComplete={resetDisabledClass}>
         {selectedRecipe !== null && (
           <DetailsComponent
             layoutId={`recipe-${selectedRecipe}`}
             recipe={itemsForCurrentPage[selectedRecipe]}
-            handleSwap={() => setSelectedRecipe(null)}
-            recipeTitle={recipes[selectedRecipe].recipe_title}
+            handleSwap={() => handleRecipeExit()}
+            // removeDisable={() => resetDisabledClass()}
+            // recipeTitle={recipes[selectedRecipe].recipe_title}
             recipeLink={recipes.recipe_link}
           />
         )}
       </AnimatePresence>
-
-      {/* {showRecipeDetails && (
-        <>
-          <DetailsComponent handleSwap={swapRecipeDetails}></DetailsComponent>
-        </>
-      )} */}
-
-      {/* {itemsForCurrentPage.map((recipe, index) => (
-          <Link
-            key={index}
-            className="recipe-link"
-            to={`/details/${
-              recipe.recipe_title
-            }?recipe_link=${encodeURIComponent(recipe.recipe_link)}&origin=${
-              recipe.origin
-            }`}
-          >
-            <div onClick={swap()} className="recipe-list-item" key={index}>
-              <span className="recipe-title">{recipe.recipe_title}</span>
-              <span className="recipe-rating">
-                {recipe.star_rating === 0 ? (
-                  <span>No Ratings</span>
-                ) : (
-                  <span>{recipe.star_rating} Stars</span>
-                )}
-              </span>
-              <span className="recipe-origin">{recipe.origin}</span>
-            </div>
-          </Link>
-        ))} */}
-      {/* </div> */}
-      {/* 
-      <div className="pagination">
-        {totalPages > 1 && (
-          <>
-            <button
-              className="page-button"
-              onClick={() => goToPage(activePage - 1)}
-              disabled={activePage === 1}
-            >
-              Previous
-            </button>
-
-            <button
-              className="page-button"
-              onClick={() => goToPage(activePage + 1)}
-              disabled={activePage === totalPages + 2}
-            >
-              Next
-            </button>
-          </>
-        )}
-      </div> */}
     </>
   );
 };

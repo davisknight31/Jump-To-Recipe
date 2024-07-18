@@ -6,7 +6,6 @@ const Card = ({ label = "", children }) => {
     <>
       <div className="card">
         <h1 className="card-header">{label}</h1>
-        {/* <div className="border"></div> */}
         {children}
       </div>
     </>

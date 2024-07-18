@@ -16,15 +16,6 @@ const IngredientList = ({ ingredientHeaders = [], ingredientLists = [] }) => {
   return (
     <>
       <div className="ingredient-component-wrapper">
-        {/* {ingredientLists.map((ingredientList, index) => (
-        <ul className="ingredient-list" key={index}>
-          <div className="section-header">{ingredientHeaders[index]}</div>
-          {ingredientList.map((ingredient, index) => (
-            <li key={index}>{ingredient}</li>
-          ))}
-        </ul>
-      ))} */}
-
         {hasNoIngredients && (
           <div className="no-ingredients">
             Ingredients could not be found. Try checking the original link.
@@ -42,7 +33,7 @@ const IngredientList = ({ ingredientHeaders = [], ingredientLists = [] }) => {
                     </div>
                   </>
                 )}
-                {/* <div className="section-header">{ingredientHeaders[index]}</div> */}
+
                 {ingredientList.map((ingredient, index) => (
                   <li key={index}>{ingredient}</li>
                 ))}

@@ -190,6 +190,10 @@
   transition: transform 0.1s;
 }
 
+.disabled {
+  pointer-events: none;
+}
+
 .recipe-list-item:hover {
   transform: scale(1.1);
   cursor: pointer;

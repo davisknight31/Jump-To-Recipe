@@ -43,6 +43,8 @@ def scrape_allrecipes_search(search_string):
     headers = {'User-Agent': f"{user_agent}"}
     response = requests.get(built_url, headers=headers)
     html_content = response.text
+    # with open('dump.html', 'w', encoding='utf-8') as f:
+    #     f.write(str(html_content))
     soup = BeautifulSoup(html_content, 'html.parser')
 
     for i in range(5):
@@ -62,6 +64,17 @@ def scrape_allrecipes_search(search_string):
             content = anchor.find(class_ = 'card__content')
             ratings = content.find(class_ = 'mntl-recipe-star-rating')
             if ratings:
+                image_source = ""
+                image_alt = ""
+                try:
+                    image_alt = "A picture showcasing the recipe"
+                    image = anchor.find(class_ = 'card__img')
+                    image_source = image.get('data-src')
+                    image_alt = image.get('alt')
+                except:
+                    print('error finding recipe image')
+                finally:
+                    print('continuing from recipe image')
                 title = content.find(class_ = 'card__title-text')
                 if title:
                     recipe_name = title.text.strip()
@@ -78,7 +91,9 @@ def scrape_allrecipes_search(search_string):
                         "origin": "allrecipes",
                         "recipe_title": recipe_name,
                         "recipe_link": recipe_link,
-                        'star_rating': stars
+                        'star_rating': stars,
+                        'recipe_image': image_source,
+                        'recipe_image_alt': image_alt
                         }
                 recipes_info.append(info)
         pagination_amount = pagination_amount + 24

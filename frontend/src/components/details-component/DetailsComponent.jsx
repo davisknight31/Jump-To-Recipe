@@ -9,14 +9,15 @@ import NutritionInfo from "../nutrition-info/NutritionInfo";
 import { getRecipeDetails } from "../../services/api";
 import Button from "../button/Button";
 
-const DetailsComponent = ({ layoutId, recipe, recipeTitle, handleSwap }) => {
+const DetailsComponent = ({ layoutId, recipe, handleSwap }) => {
   const [wrapperClassName, setWrapperClassName] = useState("");
   const [details, setDetails] = useState(null);
   const [isFetching, setIsFetching] = useState(true);
   const [recipeLink, setRecipeLink] = useState("");
+  const [recipeImageSource, setRecipeImageSource] = useState("");
+  const [recipeImageAlt, setRecipeImageAlt] = useState("");
 
   const closeDetails = () => {
-    // setWrapperClassName(" hidden");
     handleSwap();
     window.scrollTo(0, 0);
   };
@@ -29,6 +30,8 @@ const DetailsComponent = ({ layoutId, recipe, recipeTitle, handleSwap }) => {
           recipe.origin
         );
         setRecipeLink(recipe.recipe_link);
+        setRecipeImageSource(recipe.recipe_image);
+        setRecipeImageAlt(recipe.recipe_image_alt);
         console.log("response data", response.data);
         setDetails(response.data);
       } catch (error) {
@@ -47,7 +50,6 @@ const DetailsComponent = ({ layoutId, recipe, recipeTitle, handleSwap }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      // transition={{ duration: 0.1 }}
     >
       {isFetching && (
         <>
@@ -61,14 +63,15 @@ const DetailsComponent = ({ layoutId, recipe, recipeTitle, handleSwap }) => {
           <div className="details-component-container">
             <div className="nested-details">
               <GeneralRecipeDetails
-                title={recipeTitle}
+                title={details.recipe_title}
                 author={details.author}
                 prepTime={details.prep_time}
                 cookTime={details.cook_time}
                 totalTime={details.total_time}
                 servings={details.servings}
                 yield_={details.total_yield}
-                image={details.recipe_image}
+                image={recipeImageSource}
+                imageAlt={recipeImageAlt}
                 recipeLink={recipeLink}
               ></GeneralRecipeDetails>
               <div className="ingredients-and-steps">

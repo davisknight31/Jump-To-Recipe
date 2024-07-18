@@ -1,14 +1,7 @@
-/* .details-component-wrapper {
-  width: 100%;
-  height: 100%;
-  background-color: white;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  border-radius: 5px;
-} */
 .details-spinner-container {
   display: flex;
   justify-content: center;
-  /* height: 50vh; */
+
   align-items: center;
   height: 200px;
 }
@@ -34,10 +27,8 @@
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.1);
   width: 100%;
-  /* padding-top: 50px; */
   padding-bottom: 50px;
   height: 100%;
-  /* overflow: auto;*/
 }
 
 .details-component-container {
@@ -47,20 +38,16 @@
   max-width: 1000px;
   width: 40%;
   min-width: 750px;
-  /* height: 75%; */
   text-align: center;
   overflow: auto;
   padding: 15px;
   padding-bottom: 30px;
-  /* overflow: auto; */
-  /* position: absolute;*/
 }
 
 .nested-details {
-  /* height: 100%; */
   overflow: auto;
   height: 75vh;
-  margin: 25px; /* padding: 100px; */
+  margin: 25px;
 }
 
 .hidden {
@@ -73,7 +60,6 @@
   justify-content: space-between;
   flex-direction: column;
   padding: 0 50px 0 50px;
-  /* gap: 25px; */
 }
 
 .ingredient-header {
@@ -122,7 +108,6 @@
   }
 
   .details-component-wrapper {
-    /* padding-bottom: 70%; */
     height: auto;
     bottom: auto;
     background-color: transparent;
@@ -138,10 +123,3 @@
     margin: 15px;
   }
 }
-
-/* @media (max-width: 550px) {
-  .details-component-container {
-    width: 100%;
-    padding: 0;
-  }
-} */

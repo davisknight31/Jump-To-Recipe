@@ -23,7 +23,17 @@ def scrape_simplyrecipes_details(recipe_link):
     response = requests.get(recipe_link, headers=headers)
     html_content = response.text
     soup = BeautifulSoup(html_content, 'html.parser')
+    # with open('dump.html', 'w', encoding='utf-8') as f:
+    #     f.write(str(html_content))
 
+    try:
+        recipe_title = soup.find(class_ = 'heading__title').text.strip()
+        print(recipe_title)
+    except:
+        print('error finding title')
+    finally:
+        print('continuing from title')
+        
 
     try:
         prep_time = "N/A"
@@ -174,6 +184,7 @@ def scrape_simplyrecipes_details(recipe_link):
 
 
     recipe_details = {
+            "recipe_title": recipe_title,
             "author": author,
             "prep_time": prep_time,
             "cook_time": cook_time,

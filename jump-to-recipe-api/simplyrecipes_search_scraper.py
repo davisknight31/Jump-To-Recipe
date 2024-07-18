@@ -40,6 +40,17 @@ def scrape_simplyrecipes_search(search_string):
                 recipe_name = card_title.text.strip()
                 if anchor.find(class_ = "meta-text--recipe"):
                     #and search_string.lower() in recipe_name.lower()
+                    image_source = ""
+                    image_alt = ""
+                    try:
+                        image_alt = "A picture showcasing the recipe"
+                        image = anchor.find(class_ = 'card__image')
+                        image_source = image.get('data-src')
+                        image_alt = image.get('alt')
+                    except:
+                        print('error finding recipe image')
+                    finally:
+                        print('continuing from recipe image')
                     recipe_link = anchor.get('href')
                     stars_container = anchor.find(class_ = 'mntl-aggregate-star-rating')
                     stars = 0
@@ -56,7 +67,9 @@ def scrape_simplyrecipes_search(search_string):
                             "origin": "simplyrecipes",
                             "recipe_title": recipe_name,
                             "recipe_link": recipe_link,
-                            'star_rating': stars
+                            'star_rating': stars,     
+                            'recipe_image': image_source,
+                            'recipe_image_alt': image_alt
                             }
                     
                     recipe_info.append(info)

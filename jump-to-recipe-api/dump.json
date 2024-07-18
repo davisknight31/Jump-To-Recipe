@@ -1,0 +1,32 @@
+{
+  "recipe_title": "Blueberry Sweet Rolls with Lemon Glaze",
+  "author": "Sally",
+  "prep_time": "3 hours, 30 minutes",
+  "cook_time": "30 minutes",
+  "total_time": "4 hours",
+  "servings": "11-12 rolls",
+  "total_yield": "11-12 rolls",
+  "ingredient_headers": ["Rolls", "Filling", "Sweet Lemon Glaze"],
+  "ingredients": [
+    [
+      "2 and 3/4 cups (344g) all-purpose flour (spooned & leveled)",
+      "3 Tablespoons granulated sugar",
+      "1 teaspoon salt",
+      "1 packet",
+      "1/2 cup (120ml) water",
+      "1/4 cup (60ml) milk",
+      "2 and 1/2 Tablespoons (35g) unsalted butter",
+      "1 large egg, at room temperature"
+    ],
+    [
+      "1 and 1/3 cups (186g) frozen blueberries, not thawed*",
+      "1/4 cup (50g) granulated sugar",
+      "1 teaspoon cornstarch"
+    ],
+    [
+      "juice from 1 large lemon*",
+      "1 cup (120g)\xa0confectioners’ sugar",
+      "1–2 Tablespoons (15-30ml) milk, half-and-half, or heavy cream"
+    ]
+  ]
+}

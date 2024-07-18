@@ -14,7 +14,6 @@ const Input = ({
 
   return (
     <div>
-      {/* <label className="input-label">{placeholderText}</label> */}
       <input
         type="text"
         id="input"

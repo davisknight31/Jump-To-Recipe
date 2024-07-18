@@ -4,6 +4,8 @@ from allrecipes_search_scraper import scrape_allrecipes_search
 from allrecipes_recipe_scraper import scrape_allrecipes_details
 from simplyrecipes_search_scraper import scrape_simplyrecipes_search
 from simplyrecipes_recipe_scraper import scrape_simplyrecipes_details
+from sallys_search_scraper import scrape_sallys_search
+from sallys_recipe_scraper import scrape_sallys_details
 import random
 
 app = Flask(__name__)
@@ -19,6 +21,7 @@ def scrape():
 
     scraped_allrecipes_search_data = scrape_allrecipes_search(search_string)
     scraped_simplyrecipes_search_data = scrape_simplyrecipes_search(search_string)
+    scraped_sallys_search_data = scrape_sallys_search(search_string)
 
 
     scraped_allrecipes_search_data_relevant = []
@@ -40,18 +43,31 @@ def scrape():
             scraped_simplyrecipes_search_data_irrelevant.append(recipe)    
 
 
+    # scraped_sallys_search_data_relevant = []
+    # for recipe in scraped_sallys_search_data:
+    #Don't need to parse by relevance for sallys, its done in the search scraper file to prevent those weird + articles
+    
+
+
     combined_list = []
 
     #Combine relevant first
     longest_list = scraped_simplyrecipes_search_data_relevant
-    if len(scraped_allrecipes_search_data_relevant) > len(scraped_simplyrecipes_search_data_relevant):
+
+    if len(scraped_allrecipes_search_data_relevant) > len(scraped_simplyrecipes_search_data_relevant) and len(scraped_allrecipes_search_data_relevant) > len(scraped_sallys_search_data):
         longest_list = scraped_allrecipes_search_data_relevant
+
+    #sallys is only done here in relevance, again, since it is already taken care of in its script
+    if len(scraped_sallys_search_data) > len(scraped_allrecipes_search_data_relevant) and len(scraped_sallys_search_data) > len(scraped_simplyrecipes_search_data_relevant):
+        longest_list = scraped_sallys_search_data
     
     for i in range(len(longest_list)):
         if (i <= len(scraped_simplyrecipes_search_data_relevant) - 1):
             combined_list.append(scraped_simplyrecipes_search_data_relevant[i])
-        if (i <= len(scraped_allrecipes_search_data_relevant) -1 ):
+        if (i <= len(scraped_allrecipes_search_data_relevant) - 1):
             combined_list.append(scraped_allrecipes_search_data_relevant[i])
+        if (i <= len(scraped_sallys_search_data) - 1):
+            combined_list.append(scraped_sallys_search_data[i])
 
 
     #Combine irrelevant second
@@ -77,6 +93,9 @@ def get_recipe_details():
         scraped_details = scrape_allrecipes_details(recipe_link)
     if origin =='simplyrecipes':
         scraped_details = scrape_simplyrecipes_details(recipe_link)
+    if origin == "Sally's Baking Addiction":
+        scraped_details = scrape_sallys_details(recipe_link)
+
 
     # print(recipe_link)
     # print(origin)

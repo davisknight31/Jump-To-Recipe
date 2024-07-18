@@ -11,39 +11,23 @@ from fake_useragent import UserAgent
 
 
 def scrape_allrecipes_details(recipe_link):
-    # base_url = "https://www.allrecipes.com/search?q=" + str(search_string) + "&offset="
-    # pagination_amount = 0
-    # recipe_link = 'https://www.allrecipes.com/recipe/15806/chemical-apple-pie-no-apple-apple-pie/'
     options = Options()
     ua = UserAgent()
     user_agent = ua.random
-    # options.add_argument(f'--user-agent={user_agent}')
-    # options.add_argument('--headless=new')
-    # options.add_argument("--window-size=1920,1080")
-    # options.add_argument('--start-maximized')
-    # options.add_argument('--disable-gpu')
-    # options.add_argument('--no-sandbox')
-    # options.add_argument("--disable-extensions")
-    # options.add_argument('disable-infobars')
-    # options.add_argument('--ignore-certificate-errors')
-    # options.add_experimental_option('excludeSwitches', ['enable-logging'])
-
-    
-    # driver = webdriver.Chrome(options=options)
-    # print(recipe_link)
-    # driver.get(recipe_link)
-    # WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, '.article-heading')))
-    # page_source = driver.page_source
-    # with open('dump.html', 'w', encoding='utf-8') as f:
-    #     f.write(str(page_source))
-    # soup = BeautifulSoup(page_source, 'html.parser')
-
     headers = {'User-Agent': f"{user_agent}"}
     response = requests.get(recipe_link, headers=headers)
     html_content = response.text
     soup = BeautifulSoup(html_content, 'html.parser')
     
     #Find recipe details 
+    try:
+        recipe_title = soup.find(class_ = 'article-heading').text.strip()
+    except:
+        print('error finding title')
+    finally:
+        print('continuing from title')
+
+
     try:
         prep_time = "N/A"
         cook_time = "N/A"
@@ -189,6 +173,7 @@ def scrape_allrecipes_details(recipe_link):
 
     
     recipe_details = {
+            "recipe_title": recipe_title,
             "author": author,
             "prep_time": prep_time,
             "cook_time": cook_time,

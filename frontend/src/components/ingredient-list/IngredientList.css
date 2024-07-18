@@ -1,17 +1,8 @@
 .ingredient-component-wrapper {
   display: flex;
   flex-direction: column;
-  /* width: 48%; */
   width: 100%;
-  /* max-height: 400px; */
-  /* overflow: overlay; */
 }
-
-/* .ingredient-header {
-  margin: 0;
-  text-align: left;
-  padding-left: 10px;
-} */
 
 .section-header {
   font-weight: bold;
@@ -25,13 +16,7 @@
   text-align: left;
   width: fit-content;
   padding-left: 10px;
-  /* padding-top: 10px; */
-
   list-style-type: none;
-}
-
-.ingredient-list > li {
-  /* padding-bottom: 5px; */
 }
 
 .number {
