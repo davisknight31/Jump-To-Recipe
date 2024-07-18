@@ -92,7 +92,6 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
   }, []);
 
   useEffect(() => {
-    console.log(updateCount);
     let rowsPerPage = 3;
     let columnsPerPage = 3;
     if (window.innerWidth > 1550) {
@@ -121,7 +120,6 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
     }
 
     const numberOfItemsToIndex = rowsPerPage * columnsPerPage;
-    // console.log(columnsPerPage, rowsPerPage, numberOfItemsToIndex);
     let newGridClassName = "recipe-list ";
     if (numberOfItemsToIndex === 16) {
       newGridClassName += "four-by-four";
@@ -206,7 +204,6 @@ const RecipeList = ({ searchValue, resetClicked, setResetValue }) => {
   };
 
   const resetDisabledClass = () => {
-    console.log("hit");
     setDisabledClass("");
   };
 
