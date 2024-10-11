@@ -33,24 +33,24 @@ Sites Scraped:
 
 ## Technologies Used
 
-- Languages
+### Language
 
-* Python
-* JavaScript
-* HTML
-* CSS
+- Python
+- JavaScript
+- HTML
+- CSS
 
-- Frameworks
+### Frameworks
 
-* Flask (Back End)
-* ReactJS (Front End)
+- Flask (Back End)
+- ReactJS (Front End)
 
-- Libraries
+### Libraries
 
-* Beautiful Soup
-* Selenium
-* Fake User Agent
-* Requests
+- Beautiful Soup
+- Selenium
+- Fake User Agent
+- Requests
 
 ## Hosting
 
