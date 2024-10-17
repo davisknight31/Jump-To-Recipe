@@ -71,13 +71,13 @@ Sites Scraped:
 ## Reproducing the Dev Environment
 
 1. Get the link, and clone the repository on your device, in the location you want the source files.
-2. Navigate to the top level of the directory: ![Top Level](https://imgur.com/NlVyiC9)
+2. Navigate to the top level of the directory: ![Top Level](https://i.imgur.com/LU1MGxh.png)
 3. To setup and run the backend, first navigate into the backend source files using `cd jump-to-recipe-api`.
 4. Next, run `pip install -r requirements.txt` to ensure all required packages are installed.
-5. Then, to run the API, run `flask run`. If all goes correctly, you should see something like this: ![Running Backend](https://imgur.com/h35NdQ2)
+5. Then, to run the API, run `flask run`. If all goes correctly, you should see something like this: ![Running Backend](https://i.imgur.com/h35NdQ2.png)
 6. To setup and run the frontend, first navigate from the top level into the frontend source files using `cd frontend`.
-7. Next, run `npm install`. If all goes correct, you should see something like this: ![npm install result](https://imgur.com/yabNOcZ)
-8. Now, you can run `npm run dev`. If the frontend runs correctly, you should see something like this: ![Running Frontend](https://imgur.com/XslER0X)
+7. Next, run `npm install`. If all goes correct, you should see something like this: ![npm install result](https://i.imgur.com/yabNOcZ.png)
+8. Now, you can run `npm run dev`. If the frontend runs correctly, you should see something like this: ![Running Frontend](https://i.imgur.com/XslER0X.png)
 
 ## Running the Project
 
