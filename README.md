@@ -4,6 +4,8 @@
 
 Ever get tired of annoying popups and forced page scrolling due to ads on recipe websites? Well Jump To Recipe was created so that the user can bypass that and jump straight to the important stuff.
 
+To use, just enter an ingredient or dish name, search, and see all the recipes related to your search, coming from all the different sites scraped. From there, click on a recipe and a popup will appear with all the necessary details.
+
 Sites Scraped:
 
 - [All Recipes](https://www.allrecipes.com/)
@@ -35,33 +37,47 @@ Sites Scraped:
 
 ### Language
 
-- Python
-- JavaScript
-- HTML
-- CSS
+- [Python](https://www.python.org/)
+- [JavaScript](https://www.javascript.com/)
+- [HTML](https://html.spec.whatwg.org/multipage/)
+- [CSS](https://www.w3.org/Style/CSS/Overview.en.html)
 
 ### Frameworks
 
-- Flask (Back End)
-- ReactJS (Front End)
+- [Flask (Back End)](https://flask.palletsprojects.com/en/3.0.x/)
+- [ReactJS (Front End)](https://react.dev/)
 
 ### Libraries
 
-- Beautiful Soup
-- Selenium
-- Fake User Agent
-- Requests
+- [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
+- [Selenium](https://selenium-python.readthedocs.io/)
+- [Fake User Agent](https://pypi.org/project/fake-useragent/)
+- [Requests](https://requests.readthedocs.io/en/latest/)
 
 ## Hosting
 
-- The Back End is hosted on an nginx server inside a [Docker](https://www.docker.com/) container inside a [Digital Ocean](https://www.digitalocean.com/) droplet.
+- The Back End is hosted on an nginx server inside a [Docker](https://www.docker.com/) container hosted on a [Digital Ocean](https://www.digitalocean.com/) droplet.
 - The Front End is hosted on [Netlify](https://www.netlify.com/).
 
 ## What is Happening?
 
-Explain exactaly the flow of the frontend submission to the backend scraping
+1. When a user enters their search, the search term is appended to the search url associated with each of the specific websites being scraped.
+2. Requests or Selenium is used to get the html content of the search results page.
+3. The content is then parsed using BeautifulSoup to pull all the strictly relevant details.
+4. All of the details are returned to the frontend, which are then nicely formatted and styled, for easing viewing by the user.
+
+## How to use
 
 ## Reproducing the Dev Environment
+
+1. Get the link, and clone the repository on your device, in the location you want the source files.
+2. Navigate to the top level of the directory: ![Top Level](https://imgur.com/NlVyiC9)
+3. To setup and run the backend, first navigate into the backend source files using `cd jump-to-recipe-api`.
+4. Next, run `pip install -r requirements.txt` to ensure all required packages are installed.
+5. Then, to run the API, run `flask run`. If all goes correctly, you should see something like this: ![Running Backend](https://imgur.com/h35NdQ2)
+6. To setup and run the frontend, first navigate from the top level into the frontend source files using `cd frontend`.
+7. Next, run `npm install`. If all goes correct, you should see something like this: ![npm install result](https://imgur.com/yabNOcZ)
+8. Now, you can run `npm run dev`. If the frontend runs correctly, you should see something like this: ![Running Frontend](https://imgur.com/XslER0X)
 
 ## Running the Project
 

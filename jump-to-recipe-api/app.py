@@ -6,7 +6,6 @@ from simplyrecipes_search_scraper import scrape_simplyrecipes_search
 from simplyrecipes_recipe_scraper import scrape_simplyrecipes_details
 from sallys_search_scraper import scrape_sallys_search
 from sallys_recipe_scraper import scrape_sallys_details
-import random
 
 app = Flask(__name__)
 CORS(app)

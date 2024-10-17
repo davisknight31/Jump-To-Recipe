@@ -7,7 +7,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from fake_useragent import UserAgent
-import traceback
 
 
 
@@ -202,5 +201,5 @@ def scrape_simplyrecipes_details(recipe_link):
     return recipe_details
 
 
-scrape_simplyrecipes_details("https://www.simplyrecipes.com/caramel-apple-oatmeal-bars-recipe-8364022")
+# scrape_simplyrecipes_details("https://www.simplyrecipes.com/caramel-apple-oatmeal-bars-recipe-8364022")
 # scrape_simplyrecipes_details("https://www.simplyrecipes.com/baked-oatmeal-with-mixed-berries-recipe-5185886")
