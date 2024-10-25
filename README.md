@@ -1,5 +1,7 @@
 # Jump To Recipe
 
+Live Project: https://jump-to-recipe.netlify.app/
+
 ## Introduction
 
 Ever get tired of annoying popups and forced page scrolling due to ads on recipe websites? Well Jump To Recipe was created so that the user can bypass that and jump straight to the important stuff.
@@ -21,7 +23,6 @@ Sites Scraped:
 - [What is Happening?](#what-is-happening)
 - [Reproducing the Dev Environment](#reproducing-the-dev-environment)
 - [Running the Project](#running-the-project)
-- [Examples](#examples)
 
 ## Features
 
@@ -68,6 +69,10 @@ Sites Scraped:
 
 ## How to use
 
+1. Enter an ingredient, or recipe name, and click `Jump`: ![Ingredient Search](https://i.imgur.com/xRnZKHN.png)
+2. From the results that appear, click on a recipe card: ![Recipe Click](https://i.imgur.com/kRaOYwa.png)
+3. A modal will appear with the necessary details for the recipe. You can exit by clicking `Exit`: ![Details Modal](https://i.imgur.com/u8pEYHV.png)
+
 ## Reproducing the Dev Environment
 
 1. Get the link, and clone the repository on your device, in the location you want the source files.
@@ -81,4 +86,8 @@ Sites Scraped:
 
 ## Running the Project
 
-## Examples
+First make sure you have followed the installation steps in [Reproducing the Dev Environment](#reproducing-the-dev-environment).
+If the installation steps have already been completed, and this is not your first time running the project then do the following:
+
+- To run the frontend, navigate into `Jump-To-Recipe\frontend` and run `npm run dev`. You should see something like this: ![Running Frontend](https://i.imgur.com/XslER0X.png)
+- To run the backend, navigate into `Jump-To-Recipe\jump-to-recipe-api` and run `flask run`. You should see something like this: ![Running Frontend](https://i.imgur.com/XslER0X.png)
